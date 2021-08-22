@@ -1,21 +1,26 @@
-﻿using UnityEngine;
+﻿using Data;
+using UnityEngine;
+using Utils;
 
-public class MainMenu : MonoBehaviour
+namespace Scene
 {
-    public void OnOnePlayerClicked()
+    public class MainMenu : MonoBehaviour
     {
-        Configs.gameMode = Configs.GameMode.OnePlayer;
-        SceneLoader.LoadLevelSelect();
-    }
+        public void OnOnePlayerClicked()
+        {
+            Configs.GameMode = GameMode.OnePlayer;
+            SceneLoader.LoadLevelSelect();
+        }
 
-    public void OnTwoPlayerClicked()
-    {
-        Configs.gameMode = Configs.GameMode.TwoPlayer;
-        SceneLoader.LoadLevelSelect();
-    }
+        public void OnTwoPlayerClicked()
+        {
+            Configs.GameMode = GameMode.TwoPlayer;
+            SceneLoader.LoadLevelSelect();
+        }
 
-    public void OnExitClicked()
-    {
-        Application.Quit();
+        public void OnExitClicked()
+        {
+            Application.Quit();
+        }
     }
 }

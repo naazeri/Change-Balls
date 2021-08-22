@@ -1,52 +1,56 @@
-﻿using UnityEngine;
+﻿using Data;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+namespace Utils
 {
-    public static void LoadMainMenu()
+    public class SceneLoader : MonoBehaviour
     {
-        LoadScene("MainMenu");
-    }
-
-    public static void LoadLevelSelect()
-    {
-        LoadScene("LevelSelect");
-    }
-
-    public static void LoadGameplay()
-    {
-        switch (Configs.gameMode)
+        public static void LoadMainMenu()
         {
-            case Configs.GameMode.OnePlayer:
-                LoadOnePlayer();
-                break;
-
-            case Configs.GameMode.TwoPlayer:
-                LoadTwoPlayer();
-                break;
-
-            case Configs.GameMode.Online:
-                break;
+            LoadScene("MainMenu");
         }
-    }
 
-    public static void LoadOnePlayer()
-    {
-        LoadScene("OnePlayer");
-    }
+        public static void LoadLevelSelect()
+        {
+            LoadScene("LevelSelect");
+        }
 
-    public static void LoadTwoPlayer()
-    {
-        LoadScene("TwoPlayer");
-    }
+        public static void LoadGameplay()
+        {
+            switch (Configs.GameMode)
+            {
+                case GameMode.OnePlayer:
+                    LoadOnePlayer();
+                    break;
 
-    public static void LoadGameOver()
-    {
-        LoadScene("GameOver");
-    }
+                case GameMode.TwoPlayer:
+                    LoadTwoPlayer();
+                    break;
 
-    private static void LoadScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
+                case GameMode.Online:
+                    break;
+            }
+        }
+
+        private static void LoadOnePlayer()
+        {
+            LoadScene("OnePlayer");
+        }
+
+        private static void LoadTwoPlayer()
+        {
+            LoadScene("TwoPlayer");
+        }
+
+        public static void LoadGameOver()
+        {
+            LoadScene("GameOver");
+        }
+
+        private static void LoadScene(string sceneName)
+        {
+            SceneManager.LoadScene(sceneName);
+        }
     }
 }

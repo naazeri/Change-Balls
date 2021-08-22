@@ -1,14 +1,18 @@
 ﻿using UnityEngine;
+using Utils;
 
-public class GameOverScene : MonoBehaviour
+namespace Scene
 {
-    public void OnPlayAgainButtonClicked()
+    public class GameOverScene : MonoBehaviour
     {
-        SceneLoader.LoadGameplay();
-    }
+        public void OnPlayAgainButtonClicked()
+        {
+            SceneLoader.LoadGameplay();
+        }
 
-    public void OnMenuButtonClicked()
-    {
-        SceneLoader.LoadMainMenu();
+        public void OnMenuButtonClicked()
+        {
+            SceneLoader.LoadMainMenu();
+        }
     }
 }

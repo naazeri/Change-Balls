@@ -1,21 +1,26 @@
-﻿using UnityEngine;
+﻿using Data;
+using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
-public class LevelSelect : MonoBehaviour
+namespace Scene
 {
-    [SerializeField] private Text speedText;
-    [SerializeField] private Slider slider;
-
-    public void OnStartClicked()
+    public class LevelSelect : MonoBehaviour
     {
-        Configs.Speed = slider.value;
-        SceneLoader.LoadGameplay();
-    }
+        [SerializeField] private Text speedText;
+        [SerializeField] private Slider slider;
+
+        public void OnStartClicked()
+        {
+            Configs.Speed = slider.value;
+            SceneLoader.LoadGameplay();
+        }
 
 
-    public void OnSliderValueChange()
-    {
-        var sliderValue = (int) (slider.value * 10);
-        speedText.text = sliderValue.ToString();
+        public void OnSliderValueChange()
+        {
+            var sliderValue = (int) (slider.value * 10);
+            speedText.text = sliderValue.ToString();
+        }
     }
 }
