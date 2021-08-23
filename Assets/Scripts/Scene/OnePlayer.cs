@@ -10,6 +10,7 @@ namespace Scene
     {
         [SerializeField] private GameObject upperBalls;
         [SerializeField] private GameObject lowerBalls;
+        [SerializeField] private Text bestScoreText;
         [SerializeField] private Text scoreText;
 
         private const float XMirrorOffset = 1.2f;
@@ -27,6 +28,7 @@ namespace Scene
             _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
             _speed = Configs.Speed;
             _score = 0;
+            UpdateBestScoreUI();
         }
 
         private void Update()
@@ -54,7 +56,6 @@ namespace Scene
 
         private void Win()
         {
-            // OK
             _speed = -_speed; // reverse moving direction
 
             // Change Player Color
@@ -64,12 +65,12 @@ namespace Scene
                 StartCoroutine(ChangePlayerColor(DelayTime));
             }
 
-            IncreaseScore();
+            IncreaseAndUpdateScore();
         }
 
         private void GameOver()
         {
-            UpdateBestScore();
+            CheckAndUpdateBestScore();
             SceneLoader.LoadGameOver();
         }
 
@@ -99,19 +100,24 @@ namespace Scene
             }
         }
 
-        private void IncreaseScore()
+        private void IncreaseAndUpdateScore()
         {
             _score++;
             scoreText.text = _score.ToString();
         }
 
-        private void UpdateBestScore()
+        private void CheckAndUpdateBestScore()
         {
             var bestScore = DataManager.GetScore();
             if (_score > bestScore)
             {
                 DataManager.SaveScore(_score);
             }
+        }
+
+        private void UpdateBestScoreUI()
+        {
+            bestScoreText.text = $"Best Score: {DataManager.GetScore()}";
         }
 
         private static int GetRandomNumber()
