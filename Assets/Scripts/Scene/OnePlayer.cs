@@ -37,7 +37,8 @@ namespace Scene
 
             if (Input.GetMouseButtonDown(0))
             {
-                MirrorBalls();
+                AnimationTools.MirrorBalls(upperBalls);
+                AnimationTools.MirrorBalls(lowerBalls);
             }
         }
 
@@ -72,18 +73,6 @@ namespace Scene
         {
             CheckAndUpdateBestScore();
             SceneLoader.LoadGameOver();
-        }
-
-        private void MirrorBalls()
-        {
-            upperBalls.transform.Rotate(Vector3.forward, 180);
-            lowerBalls.transform.Rotate(Vector3.forward, 180);
-
-            // var upperPosition = upperBalls.transform.position;
-            // var lowerPosition = lowerBalls.transform.position;
-            //
-            // upperBalls.transform.position = new Vector2(upperPosition.x == 0 ? XMirrorOffset : 0, upperPosition.y);
-            // lowerBalls.transform.position = new Vector2(lowerPosition.x == 0 ? -XMirrorOffset : 0, lowerPosition.y);
         }
 
         private IEnumerator ChangePlayerColor(float delayTime)

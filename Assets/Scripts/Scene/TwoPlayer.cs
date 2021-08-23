@@ -34,12 +34,12 @@ namespace Scene
 
         public void OnUpperClicked()
         {
-            MirrorUpperBalls();
+            AnimationTools.MirrorBalls(upperBalls);
         }
 
         public void OnLowerClicked()
         {
-            MirrorLowerBalls();
+            AnimationTools.MirrorBalls(lowerBalls);
         }
 
         private void OnTriggerEnter2D(Collider2D collidedObject)
@@ -65,18 +65,6 @@ namespace Scene
                 {
                 }
             }
-        }
-
-        private void MirrorUpperBalls()
-        {
-            var upperPosition = upperBalls.transform.position;
-            upperBalls.transform.position = new Vector2(upperPosition.x == 0 ? XMirrorOffset : 0, upperPosition.y);
-        }
-
-        private void MirrorLowerBalls()
-        {
-            var lowerPosition = lowerBalls.transform.position;
-            lowerBalls.transform.position = new Vector2(lowerPosition.x == 0 ? -XMirrorOffset : 0, lowerPosition.y);
         }
 
         private IEnumerator ChangePlayerColor(float delayTime)

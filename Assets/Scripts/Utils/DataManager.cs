@@ -2,7 +2,7 @@
 
 namespace Utils
 {
-    public class DataManager
+    public static class DataManager
     {
         private const string ScoreKey = "s";
 

@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace Utils
 {
-    public class SceneLoader : MonoBehaviour
+    public static class SceneLoader
     {
         public static void LoadMainMenu()
         {

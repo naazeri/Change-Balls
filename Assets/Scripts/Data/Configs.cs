@@ -1,8 +1,6 @@
-﻿using UnityEngine;
-
-namespace Data
+﻿namespace Data
 {
-    public class Configs : MonoBehaviour
+    public static class Configs
     {
         public static float Speed = 7.0f;
         public static GameMode GameMode = GameMode.OnePlayer;
