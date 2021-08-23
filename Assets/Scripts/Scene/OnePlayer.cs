@@ -76,11 +76,14 @@ namespace Scene
 
         private void MirrorBalls()
         {
-            var upperPosition = upperBalls.transform.position;
-            var lowerPosition = lowerBalls.transform.position;
+            upperBalls.transform.Rotate(Vector3.forward, 180);
+            lowerBalls.transform.Rotate(Vector3.forward, 180);
 
-            upperBalls.transform.position = new Vector2(upperPosition.x == 0 ? XMirrorOffset : 0, upperPosition.y);
-            lowerBalls.transform.position = new Vector2(lowerPosition.x == 0 ? -XMirrorOffset : 0, lowerPosition.y);
+            // var upperPosition = upperBalls.transform.position;
+            // var lowerPosition = lowerBalls.transform.position;
+            //
+            // upperBalls.transform.position = new Vector2(upperPosition.x == 0 ? XMirrorOffset : 0, upperPosition.y);
+            // lowerBalls.transform.position = new Vector2(lowerPosition.x == 0 ? -XMirrorOffset : 0, lowerPosition.y);
         }
 
         private IEnumerator ChangePlayerColor(float delayTime)
