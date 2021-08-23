@@ -20,7 +20,6 @@ namespace Scene
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _spriteRenderer;
 
-        // Start is called before the first frame update
         private void Start()
         {
             Application.targetFrameRate = 120;
@@ -30,7 +29,6 @@ namespace Scene
             _score = 0;
         }
 
-        // Update is called once per frame
         private void Update()
         {
             _rigidbody2D.velocity = new Vector2(0, _speed);
@@ -38,7 +36,6 @@ namespace Scene
             if (Input.GetMouseButtonDown(0))
             {
                 MirrorBalls();
-                // StartCoroutine(MirrorBalls(DelayTime));
             }
         }
 
@@ -46,49 +43,32 @@ namespace Scene
         {
             if (gameObject.tag.Equals(collidedObject.gameObject.tag))
             {
-                // OK
-                _speed = -_speed; // reverse moving direction
-
-                // Change Player Color
-                var random = GetRandomNumber();
-                if (random > 0)
-                {
-                    StartCoroutine(ChangePlayerColor(DelayTime));
-                }
-
-                IncreaseScore();
-
-                // if (collidedObject.gameObject.transform.parent.name.Equals("Lower"))
-                // {
-                //     // AI: Change Upper Balls Color
-                //     MatchUpperBallsWithPlayerColor();
-                // }
+                Win();
             }
             else
             {
-                // GameOver
-                SceneLoader.LoadGameOver();
+                GameOver();
+            }
+        }
+
+        private void Win()
+        {
+            // OK
+            _speed = -_speed; // reverse moving direction
+
+            // Change Player Color
+            var random = GetRandomNumber();
+            if (random > 0)
+            {
+                StartCoroutine(ChangePlayerColor(DelayTime));
             }
 
-            // switch (other.gameObject.name[0])
-            // {
-            //     case '0':
-            //         // WhiteBallUpper
-            //
-            //         break;
-            //
-            //     case '1':
-            //
-            //         break;
-            //
-            //     case '2':
-            //
-            //         break;
-            //
-            //     case '3':
-            //
-            //         break;
-            // }
+            IncreaseScore();
+        }
+
+        private static void GameOver()
+        {
+            SceneLoader.LoadGameOver();
         }
 
         private void MirrorBalls()
@@ -98,15 +78,6 @@ namespace Scene
 
             upperBalls.transform.position = new Vector2(upperPosition.x == 0 ? XMirrorOffset : 0, upperPosition.y);
             lowerBalls.transform.position = new Vector2(lowerPosition.x == 0 ? -XMirrorOffset : 0, lowerPosition.y);
-
-            // if (position.y > 0)
-            // {
-            //     balls.tag = position.x == 0 ? "white" : "black";
-            // }
-            // else
-            // {
-            //     balls.tag = position.x == 0 ? "black" : "white";
-            // }
         }
 
         private IEnumerator ChangePlayerColor(float delayTime)
@@ -131,15 +102,6 @@ namespace Scene
             _score++;
             scoreText.text = _score.ToString();
         }
-
-        // private void MatchUpperBallsWithPlayerColor()
-        // {
-        //     if (_spriteRenderer.color == Color.black && upperBalls.tag.Equals("white") ||
-        //         _spriteRenderer.color == Color.white && upperBalls.tag.Equals("black"))
-        //     {
-        //         MirrorBalls();
-        //     }
-        // }
 
         private static int GetRandomNumber()
         {
