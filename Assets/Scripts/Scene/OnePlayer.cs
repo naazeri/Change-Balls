@@ -39,6 +39,7 @@ namespace Scene
             }
         }
 
+        // Trigger on Player collide with Balls
         private void OnTriggerEnter2D(Collider2D collidedObject)
         {
             if (gameObject.tag.Equals(collidedObject.gameObject.tag))
@@ -66,8 +67,9 @@ namespace Scene
             IncreaseScore();
         }
 
-        private static void GameOver()
+        private void GameOver()
         {
+            UpdateBestScore();
             SceneLoader.LoadGameOver();
         }
 
@@ -101,6 +103,15 @@ namespace Scene
         {
             _score++;
             scoreText.text = _score.ToString();
+        }
+
+        private void UpdateBestScore()
+        {
+            var bestScore = DataManager.GetScore();
+            if (_score > bestScore)
+            {
+                DataManager.SaveScore(_score);
+            }
         }
 
         private static int GetRandomNumber()
