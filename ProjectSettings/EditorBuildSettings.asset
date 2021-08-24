@@ -15,9 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/LocalGame.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/TwoPlayer.unity
-    guid: 24b045a148c7bf046bff12043c4690e9
-  - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 703e573bfcd2fb54ea30b235e9133bf2
   m_configObjects: {}
