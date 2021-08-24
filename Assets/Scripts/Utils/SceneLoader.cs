@@ -21,26 +21,27 @@ namespace Utils
             switch (Configs.GameMode)
             {
                 case GameMode.OnePlayer:
-                    LoadOnePlayer();
+                    LoadLocalGame();
                     break;
 
                 case GameMode.TwoPlayer:
-                    LoadTwoPlayer();
+                    LoadLocalGame();
                     break;
 
                 case GameMode.Online:
+                    LoadLocalGame();
                     break;
             }
         }
 
-        private static void LoadOnePlayer()
+        private static void LoadLocalGame()
         {
-            LoadScene("OnePlayer");
+            LoadScene("LocalGame");
         }
 
-        private static void LoadTwoPlayer()
+        private static void LoadOnlineGame()
         {
-            LoadScene("TwoPlayer");
+            LoadScene("OnlineGame");
         }
 
         public static void LoadGameOver()

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Data;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,36 +11,52 @@ namespace Scene
     {
         [SerializeField] private GameObject upperBalls;
         [SerializeField] private GameObject lowerBalls;
+        [SerializeField] private GameObject screenButton;
+        [SerializeField] private GameObject upperButton;
+        [SerializeField] private GameObject lowerButton;
         [SerializeField] private Text bestScoreText;
         [SerializeField] private Text scoreText;
 
-        private const float XMirrorOffset = 1.2f;
-        private const float DelayTime = 0.05f;
-        private float _speed;
-        private int _score;
-
+        private Vector2 _speed;
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _spriteRenderer;
+        private int _score;
+        private const float DelayTime = 0.05f;
 
         private void Start()
         {
+            ChangeGameMode();
+            
             Application.targetFrameRate = 120;
+            
             _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
             _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-            _speed = Configs.Speed;
+
+            _speed = new Vector2(0, Configs.Speed);
             _score = 0;
+
             UpdateBestScoreUI();
         }
 
         private void Update()
         {
-            _rigidbody2D.velocity = new Vector2(0, _speed);
+            _rigidbody2D.velocity = _speed;
+        }
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                AnimationTools.MirrorBalls(upperBalls);
-                AnimationTools.MirrorBalls(lowerBalls);
-            }
+        public void OnScreenClicked()
+        {
+            OnUpperClicked();
+            OnLowerClicked();
+        }
+
+        public void OnUpperClicked()
+        {
+            AnimationTools.MirrorBalls(upperBalls);
+        }
+
+        public void OnLowerClicked()
+        {
+            AnimationTools.MirrorBalls(lowerBalls);
         }
 
         // Trigger on Player collide with Balls
@@ -73,6 +90,26 @@ namespace Scene
         {
             CheckAndUpdateBestScore();
             SceneLoader.LoadGameOver();
+        }
+
+        private void ChangeGameMode()
+        {
+            switch(Configs.GameMode)
+            {
+                case GameMode.OnePlayer:
+                    screenButton.SetActive(true);
+                    //upperButton.SetActive(false);
+                    //lowerButton.SetActive(false);
+                    break;
+
+                case GameMode.TwoPlayer:
+                    upperButton.SetActive(true);
+                    lowerButton.SetActive(true);
+                    break;
+
+                default:
+                    throw new ArgumentException();
+            }
         }
 
         private IEnumerator ChangePlayerColor(float delayTime)
@@ -114,7 +151,7 @@ namespace Scene
 
         private static int GetRandomNumber()
         {
-            return Random.Range(-5, 5);
+            return UnityEngine.Random.Range(-5, 5);
         }
     }
 }

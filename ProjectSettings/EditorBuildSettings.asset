@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelSelect.unity
     guid: 2f52e42a13bf033448a0075764da0016
   - enabled: 1
-    path: Assets/Scenes/OnePlayer.unity
+    path: Assets/Scenes/LocalGame.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/TwoPlayer.unity

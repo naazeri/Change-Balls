@@ -16,7 +16,6 @@ namespace Scene
             SceneLoader.LoadGameplay();
         }
 
-
         public void OnSliderValueChange()
         {
             var sliderValue = (int) (slider.value * 10);
