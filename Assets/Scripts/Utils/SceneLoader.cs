@@ -1,5 +1,4 @@
 ﻿using Data;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Utils
@@ -34,12 +33,7 @@ namespace Utils
             }
         }
 
-        private static void LoadLocalGame()
-        {
-            LoadScene("LocalGame");
-        }
-
-        private static void LoadOnlineGame()
+        public static void LoadOnlineGame()
         {
             LoadScene("OnlineGame");
         }
@@ -47,6 +41,11 @@ namespace Utils
         public static void LoadGameOver()
         {
             LoadScene("GameOver");
+        }
+
+        private static void LoadLocalGame()
+        {
+            LoadScene("LocalGame");
         }
 
         private static void LoadScene(string sceneName)
