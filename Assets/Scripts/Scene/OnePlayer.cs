@@ -43,18 +43,18 @@ namespace Scene
             _rigidbody2D.velocity = _speed;
         }
 
-        public void OnScreenClicked()
+        private void OnScreenClicked()
         {
             OnUpperClicked();
             OnLowerClicked();
         }
 
-        public void OnUpperClicked()
+        private void OnUpperClicked()
         {
             AnimationTools.MirrorBalls(upperBalls);
         }
 
-        public void OnLowerClicked()
+        private void OnLowerClicked()
         {
             AnimationTools.MirrorBalls(lowerBalls);
         }
