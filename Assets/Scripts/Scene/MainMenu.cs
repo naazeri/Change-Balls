@@ -18,11 +18,11 @@ namespace Scene
             SceneLoader.LoadLevelSelect();
         }
 
-        public void OnOnlineClicked()
-        {
-            Configs.GameMode = GameMode.Online;
-            SceneLoader.LoadOnlineGame();
-        }
+        // public void OnOnlineClicked()
+        // {
+        //     Configs.GameMode = GameMode.Online;
+        //     SceneLoader.LoadOnlineGame();
+        // }
 
         public void OnExitClicked()
         {

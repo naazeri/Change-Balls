@@ -4,10 +4,14 @@ namespace Utils
 {
     public static class DataManager
     {
-        private const string ScoreKey = "s";
+        private const string BestScoreKey = "bs";
+        private const string CurrentScoreKey = "cs";
 
-        public static void SaveScore(int value) => Save(ScoreKey, value);
-        public static int GetScore() => Get(ScoreKey, 0);
+        public static void SaveBestScore(int value) => Save(BestScoreKey, value);
+        public static int GetBestScore() => Get(BestScoreKey, 0);
+
+        public static void SaveCurrentScore(int value) => Save(CurrentScoreKey, value);
+        public static int GetCurrentScore() => Get(CurrentScoreKey, 0);
 
         private static void Save(string key, int value)
         {

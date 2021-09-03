@@ -26,9 +26,9 @@ namespace Scene
         private void Start()
         {
             ChangeGameMode();
-            
+
             Application.targetFrameRate = 120;
-            
+
             _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
             _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
@@ -89,12 +89,13 @@ namespace Scene
         private void GameOver()
         {
             CheckAndUpdateBestScore();
+            UpdateCurrentScore();
             SceneLoader.LoadGameOver();
         }
 
         private void ChangeGameMode()
         {
-            switch(Configs.GameMode)
+            switch (Configs.GameMode)
             {
                 case GameMode.OnePlayer:
                     screenButton.SetActive(true);
@@ -137,16 +138,21 @@ namespace Scene
 
         private void CheckAndUpdateBestScore()
         {
-            var bestScore = DataManager.GetScore();
+            var bestScore = DataManager.GetBestScore();
             if (_score > bestScore)
             {
-                DataManager.SaveScore(_score);
+                DataManager.SaveBestScore(_score);
             }
+        }
+
+        private void UpdateCurrentScore()
+        {
+            DataManager.SaveCurrentScore(_score);
         }
 
         private void UpdateBestScoreUI()
         {
-            bestScoreText.text = $"Best Score: {DataManager.GetScore()}";
+            bestScoreText.text = $"Best Score: {DataManager.GetBestScore()}";
         }
 
         private static int GetRandomNumber()

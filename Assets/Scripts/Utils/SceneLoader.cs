@@ -27,9 +27,9 @@ namespace Utils
                     LoadLocalGame();
                     break;
 
-                case GameMode.Online:
-                    LoadLocalGame();
-                    break;
+                // case GameMode.Online:
+                //     LoadLocalGame();
+                //     break;
             }
         }
 
