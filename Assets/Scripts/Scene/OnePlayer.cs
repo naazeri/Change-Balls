@@ -1,21 +1,23 @@
-﻿using System;
+﻿using Data;
+using System;
 using System.Collections;
-using Data;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Utils;
 
 namespace Scene
 {
     public class OnePlayer : MonoBehaviour
     {
-        [SerializeField] private GameObject upperBalls;
-        [SerializeField] private GameObject lowerBalls;
-        [SerializeField] private GameObject screenButton;
-        [SerializeField] private GameObject upperButton;
-        [SerializeField] private GameObject lowerButton;
-        [SerializeField] private Text bestScoreText;
-        [SerializeField] private Text scoreText;
+        [SerializeField] GameObject _leftBalls;
+        [SerializeField] GameObject _rightBalls;
+        [SerializeField] GameObject _screenButton;
+        [SerializeField] GameObject _leftButton;
+        [SerializeField] GameObject _rightButton;
+        [SerializeField] GameObject _gameplayMenu;
+        [SerializeField] GameObject _gameResultMenu;
+        [SerializeField] TextMeshProUGUI _bestScoreText;
+        [SerializeField] TextMeshProUGUI _scoreText;
 
         private Vector2 _speed;
         private Rigidbody2D _rigidbody2D;
@@ -23,16 +25,14 @@ namespace Scene
         private int _score;
         private const float DelayTime = 0.05f;
 
-        private void Start()
+        private void OnEnable()
         {
             ChangeGameMode();
-
-            Application.targetFrameRate = 120;
 
             _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
             _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
-            _speed = new Vector2(0, Configs.Speed);
+            _speed = new Vector2(Configs.Speed, 0);
             _score = 0;
 
             UpdateBestScoreUI();
@@ -45,18 +45,18 @@ namespace Scene
 
         private void OnScreenClicked()
         {
-            OnUpperClicked();
-            OnLowerClicked();
+            OnRightClicked();
+            OnLeftClicked();
         }
 
-        private void OnUpperClicked()
+        private void OnRightClicked()
         {
-            AnimationTools.MirrorBalls(upperBalls);
+            AnimationTools.MirrorBalls(_rightBalls);
         }
 
-        private void OnLowerClicked()
+        private void OnLeftClicked()
         {
-            AnimationTools.MirrorBalls(lowerBalls);
+            AnimationTools.MirrorBalls(_leftBalls);
         }
 
         // Trigger on Player collide with Balls
@@ -90,7 +90,10 @@ namespace Scene
         {
             CheckAndUpdateBestScore();
             UpdateCurrentScore();
-            SceneLoader.LoadGameOver();
+            ResetGame();
+
+            _gameResultMenu.SetActive(true);
+            _gameplayMenu.SetActive(false);
         }
 
         private void ChangeGameMode()
@@ -98,14 +101,14 @@ namespace Scene
             switch (Configs.GameMode)
             {
                 case GameMode.OnePlayer:
-                    screenButton.SetActive(true);
+                    _screenButton.SetActive(true);
                     //upperButton.SetActive(false);
                     //lowerButton.SetActive(false);
                     break;
 
                 case GameMode.TwoPlayer:
-                    upperButton.SetActive(true);
-                    lowerButton.SetActive(true);
+                    _rightButton.SetActive(true);
+                    _leftButton.SetActive(true);
                     break;
 
                 default:
@@ -133,7 +136,7 @@ namespace Scene
         private void IncreaseAndUpdateScore()
         {
             _score++;
-            scoreText.text = _score.ToString();
+            _scoreText.text = _score.ToString();
         }
 
         private void CheckAndUpdateBestScore()
@@ -152,7 +155,13 @@ namespace Scene
 
         private void UpdateBestScoreUI()
         {
-            bestScoreText.text = $"Best Score: {DataManager.GetBestScore()}";
+            _bestScoreText.text = $"Best Score: {DataManager.GetBestScore()}";
+        }
+
+        private void ResetGame()
+        {
+            _speed = Vector2.zero;
+            transform.position = new Vector3(0, 0, transform.position.z);
         }
 
         private static int GetRandomNumber()

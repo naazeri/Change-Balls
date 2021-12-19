@@ -5,9 +5,15 @@ namespace Utils
 {
     public static class SceneLoader
     {
+
+        public static void LoadNextScene()
+        {
+            LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
         public static void LoadMainMenu()
         {
-            LoadScene("MainMenu");
+            LoadScene("Menu");
         }
 
         public static void LoadLevelSelect()
@@ -27,20 +33,15 @@ namespace Utils
                     LoadLocalGame();
                     break;
 
-                // case GameMode.Online:
-                //     LoadLocalGame();
-                //     break;
+                    // case GameMode.Online:
+                    //     LoadLocalGame();
+                    //     break;
             }
         }
 
-        public static void LoadOnlineGame()
+        public static void LoadGameResult()
         {
-            LoadScene("OnlineGame");
-        }
-
-        public static void LoadGameOver()
-        {
-            LoadScene("GameOver");
+            LoadScene("GameResult");
         }
 
         private static void LoadLocalGame()
@@ -48,9 +49,24 @@ namespace Utils
             LoadScene("LocalGame");
         }
 
+        public static void LoadStatistic()
+        {
+            LoadScene("Statistic");
+        }
+
+        public static void LoadAbout()
+        {
+            LoadScene("About");
+        }
+
         private static void LoadScene(string sceneName)
         {
             SceneManager.LoadScene(sceneName);
+        }
+
+        private static void LoadScene(int sceneIndex)
+        {
+            SceneManager.LoadScene(sceneIndex);
         }
     }
 }
