@@ -7,7 +7,7 @@ using Utils;
 
 namespace Scene
 {
-    public class OnePlayer : MonoBehaviour
+    public class Player : MonoBehaviour
     {
         [SerializeField] GameObject _leftBalls;
         [SerializeField] GameObject _rightBalls;
@@ -195,6 +195,7 @@ namespace Scene
         {
             _speed = Vector2.zero;
             transform.position = new Vector3(0, 0, transform.position.z);
+            OnScreenClicked();
         }
 
         private static int GetRandomNumber()

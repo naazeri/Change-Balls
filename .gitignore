@@ -60,3 +60,4 @@ crashlytics-build.properties
 /.idea/
 /export/
 /export-*/
+/Installer/

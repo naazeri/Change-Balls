@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using System;
+using Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,8 +10,10 @@ namespace Scene
     public class MainMenu : MonoBehaviour
     {
         // speed
-        [SerializeField] TextMeshProUGUI _speedText;
+        [SerializeField] TextMeshProUGUI _speedSliderValueText;
+        [SerializeField] TextMeshProUGUI _frameRateSliderValueText;
         [SerializeField] Slider _speedSlider;
+        [SerializeField] Slider _frameRateSlider;
 
         // statistic
         [SerializeField] TextMeshProUGUI _statisticBestScoreOnePlayerText;
@@ -22,7 +25,13 @@ namespace Scene
 
         private void Awake()
         {
-            Application.targetFrameRate = 60;
+            UpdateFrameRate(DataManager.GetFrameRate());
+        }
+
+        private void UpdateFrameRate(int fps)
+        {
+            Application.targetFrameRate = fps;
+            _frameRateSlider.value = fps;
         }
 
         /*** Main Menu ***/
@@ -44,18 +53,26 @@ namespace Scene
         }
 
         /*** Speed Menu ***/
-        public void OnSliderValueChange()
+        public void OnSpeedSliderValueChange()
         {
             var sliderValue = (int)(_speedSlider.value * 10);
-            _speedText.text = sliderValue.ToString();
+            _speedSliderValueText.text = sliderValue.ToString();
             Configs.Speed = _speedSlider.value;
         }
 
-        //public void OnStartGameClicked()
-        //{
-        //    Configs.Speed = _speedSlider.value;
-        //    //SceneLoader.LoadGameplay();
-        //}
+        /*** Setting Menu ***/
+        public void OnFrameRateSliderValueChange()
+        {
+            int sliderValue = (int)_frameRateSlider.value;
+            _frameRateSliderValueText.text = sliderValue.ToString();
+        }
+
+        public void OnSettingSaveClicked()
+        {
+            int fps = (int)_frameRateSlider.value;
+            DataManager.SaveFrameRate(fps);
+            UpdateFrameRate(fps);
+        }
 
         /*** About Menu ***/
         public void OpenSiteUrl()

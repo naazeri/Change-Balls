@@ -8,6 +8,7 @@ namespace Utils
         private const string BestScoreOnePlayerKey = "bso";
         private const string BestScoreTwoPlayerKey = "bst";
         private const string CurrentScoreKey = "cs";
+        private const string FrameRateKey = "fps";
 
         public static void SaveBestScore(int score)
         {
@@ -42,9 +43,10 @@ namespace Utils
         public static int GetOnePlayerBestScore() => Get(BestScoreOnePlayerKey, 0);
         private static void SaveTwoPlayerBestScore(int value) => Save(BestScoreTwoPlayerKey, value);
         public static int GetTwoPlayerBestScore() => Get(BestScoreTwoPlayerKey, 0);
-
         public static void SaveCurrentScore(int value) => Save(CurrentScoreKey, value);
         public static int GetCurrentScore() => Get(CurrentScoreKey, 0);
+        public static void SaveFrameRate(int value) => Save(FrameRateKey, value);
+        public static int GetFrameRate() => Get(FrameRateKey, 60);
 
         private static void Save(string key, int value)
         {
