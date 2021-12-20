@@ -2,6 +2,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Utils;
 
 namespace Scene
@@ -37,22 +38,40 @@ namespace Scene
             UpdateBestScoreUIFromDB();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            if (Input.GetKeyDown(KeyCode.Space) && Configs.GameMode == GameMode.OnePlayer)
-            {
-                OnScreenClicked();
-            }
-            else if (Input.GetKeyDown(KeyCode.Space) && Configs.GameMode == GameMode.TwoPlayer)
-            {
-                OnLeftClicked();
-            }
-            else if (Input.GetKeyDown(KeyCode.Return) && Configs.GameMode == GameMode.TwoPlayer)
-            {
-                OnRightClicked();
-            }
-
             _rigidbody2D.velocity = _speed;
+        }
+
+        public void OnSpaceKeyPressed(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                if (Configs.GameMode == GameMode.OnePlayer)
+                {
+                    OnScreenClicked();
+                }
+                else
+                {
+                    OnLeftClicked();
+                }
+            }
+        }
+
+        public void OnEnterKeyPressed(InputAction.CallbackContext context)
+        {
+            // Enter key press
+            if (context.performed)
+            {
+                if (Configs.GameMode == GameMode.OnePlayer)
+                {
+                    OnScreenClicked();
+                }
+                else
+                {
+                    OnRightClicked();
+                }
+            }
         }
 
         public void OnScreenClicked()
