@@ -8,11 +8,17 @@ namespace Scene
 {
     public class MainMenu : MonoBehaviour
     {
+        // speed
         [SerializeField] TextMeshProUGUI _speedText;
         [SerializeField] Slider _speedSlider;
 
-        [SerializeField] TextMeshProUGUI _bestScoreOnePlayerText;
-        [SerializeField] TextMeshProUGUI _bestScoreTwoPlayerText;
+        // statistic
+        [SerializeField] TextMeshProUGUI _statisticBestScoreOnePlayerText;
+        [SerializeField] TextMeshProUGUI _statisticBestScoreTwoPlayerText;
+
+        // game result
+        [SerializeField] TextMeshProUGUI _gameResultBestScoreText;
+        [SerializeField] TextMeshProUGUI _gameResultCurrentScoreText;
 
         private void Awake()
         {
@@ -31,8 +37,6 @@ namespace Scene
             Configs.GameMode = GameMode.TwoPlayer;
             //SceneLoader.LoadLevelSelect();
         }
-
-
 
         public void OnExitClicked()
         {
@@ -62,9 +66,15 @@ namespace Scene
         /*** Statistics Menu ***/
         public void UpdateStatistics()
         {
-            _bestScoreOnePlayerText.text = $"Best Score: {DataManager.GetOnePlayerBestScore()}";
-            _bestScoreTwoPlayerText.text = $"Best Score: {DataManager.GetTwoPlayerBestScore()}";
+            _statisticBestScoreOnePlayerText.text = $"Best Score: {DataManager.GetOnePlayerBestScore()}";
+            _statisticBestScoreTwoPlayerText.text = $"Best Score: {DataManager.GetTwoPlayerBestScore()}";
         }
 
+        /*** Game Result ***/
+        public void UpdateGameResultScores()
+        {
+            _gameResultBestScoreText.text = $"Best Score: {DataManager.GetBestScore()}";
+            _gameResultCurrentScoreText.text = $"Current Score: {DataManager.GetCurrentScore()}";
+        }
     }
 }

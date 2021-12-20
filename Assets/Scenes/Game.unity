@@ -383,8 +383,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speedText: {fileID: 1973926514}
   _speedSlider: {fileID: 1099778914}
-  _bestScoreOnePlayerText: {fileID: 1641498486}
-  _bestScoreTwoPlayerText: {fileID: 1886606900}
+  _statisticBestScoreOnePlayerText: {fileID: 1641498486}
+  _statisticBestScoreTwoPlayerText: {fileID: 1886606900}
+  _gameResultBestScoreText: {fileID: 567607634}
+  _gameResultCurrentScoreText: {fileID: 1220890071}
 --- !u!4 &52924838
 Transform:
   m_ObjectHideFlags: 0
@@ -2065,7 +2067,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 728382821}
-          m_MethodName: OnUpperClicked
+          m_MethodName: OnRightClicked
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3916,7 +3918,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Developer: Reza Nazeri'
+  m_text: 'Developer: Naazeri'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4264,7 +4266,7 @@ RectTransform:
   m_GameObject: {fileID: 1165381032}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0005314, y: 1.0005314, z: 1.0005314}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1615066138}
   - {fileID: 567607633}
@@ -4918,7 +4920,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 728382821}
-          m_MethodName: OnLowerClicked
+          m_MethodName: OnLeftClicked
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

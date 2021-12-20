@@ -1,5 +1,4 @@
 ﻿using Data;
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -23,11 +22,11 @@ namespace Scene
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _spriteRenderer;
         private int _score;
-        private const float DelayTime = 0.05f;
+        private const float ChangePlayerColorDelayTimeDelayTime = 0.05f;
 
         private void OnEnable()
         {
-            ChangeGameMode();
+            //EnableTouchSupport(); // uncomment for android touch
 
             _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
             _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -35,26 +34,39 @@ namespace Scene
             _speed = new Vector2(Configs.Speed, 0);
             _score = 0;
 
-            UpdateBestScoreUI();
+            UpdateBestScoreUIFromDB();
         }
 
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Space) && Configs.GameMode == GameMode.OnePlayer)
+            {
+                OnScreenClicked();
+            }
+            else if (Input.GetKeyDown(KeyCode.Space) && Configs.GameMode == GameMode.TwoPlayer)
+            {
+                OnLeftClicked();
+            }
+            else if (Input.GetKeyDown(KeyCode.Return) && Configs.GameMode == GameMode.TwoPlayer)
+            {
+                OnRightClicked();
+            }
+
             _rigidbody2D.velocity = _speed;
         }
 
-        private void OnScreenClicked()
+        public void OnScreenClicked()
         {
             OnRightClicked();
             OnLeftClicked();
         }
 
-        private void OnRightClicked()
+        public void OnRightClicked()
         {
             AnimationTools.MirrorBalls(_rightBalls);
         }
 
-        private void OnLeftClicked()
+        public void OnLeftClicked()
         {
             AnimationTools.MirrorBalls(_leftBalls);
         }
@@ -80,39 +92,40 @@ namespace Scene
             var random = GetRandomNumber();
             if (random > 0)
             {
-                StartCoroutine(ChangePlayerColor(DelayTime));
+                StartCoroutine(ChangePlayerColor(ChangePlayerColorDelayTimeDelayTime));
             }
 
-            IncreaseAndUpdateScore();
+            IncreaseAndUpdateCurrentScoreUI();
         }
 
         private void GameOver()
         {
-            CheckAndUpdateBestScore();
-            UpdateCurrentScore();
+            SaveBestScore();
+            SaveCurrentScore();
             ResetGame();
+
+            var mainMenuClass = FindObjectOfType(typeof(MainMenu)) as MainMenu;
+            mainMenuClass.UpdateGameResultScores();
 
             _gameResultMenu.SetActive(true);
             _gameplayMenu.SetActive(false);
         }
 
-        private void ChangeGameMode()
+        private void EnableTouchSupport()
         {
             switch (Configs.GameMode)
             {
                 case GameMode.OnePlayer:
                     _screenButton.SetActive(true);
-                    //upperButton.SetActive(false);
-                    //lowerButton.SetActive(false);
+                    _leftButton.SetActive(false);
+                    _rightButton.SetActive(false);
                     break;
 
                 case GameMode.TwoPlayer:
-                    _rightButton.SetActive(true);
+                    _screenButton.SetActive(false);
                     _leftButton.SetActive(true);
+                    _rightButton.SetActive(true);
                     break;
-
-                default:
-                    throw new ArgumentException();
             }
         }
 
@@ -133,29 +146,30 @@ namespace Scene
             }
         }
 
-        private void IncreaseAndUpdateScore()
+        private void IncreaseAndUpdateCurrentScoreUI()
         {
             _score++;
             _scoreText.text = _score.ToString();
         }
 
-        private void CheckAndUpdateBestScore()
+        private void UpdateBestScoreUIFromDB()
+        {
+            _bestScoreText.text = $"Best Score: {DataManager.GetBestScore()}";
+        }
+
+        private void SaveBestScore()
         {
             var bestScore = DataManager.GetBestScore();
+
             if (_score > bestScore)
             {
                 DataManager.SaveBestScore(_score);
             }
         }
 
-        private void UpdateCurrentScore()
+        private void SaveCurrentScore()
         {
             DataManager.SaveCurrentScore(_score);
-        }
-
-        private void UpdateBestScoreUI()
-        {
-            _bestScoreText.text = $"Best Score: {DataManager.GetBestScore()}";
         }
 
         private void ResetGame()
