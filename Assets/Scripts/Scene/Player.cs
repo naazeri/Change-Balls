@@ -27,7 +27,10 @@ namespace Scene
 
         private void OnEnable()
         {
-            //EnableTouchSupport(); // uncomment for android touch
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                EnableTouchSupport(); // uncomment for android touch
+            }
 
             _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
             _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -123,7 +126,7 @@ namespace Scene
             SaveCurrentScore();
             ResetGame();
 
-            var mainMenuClass = FindObjectOfType(typeof(MainMenu)) as MainMenu;
+            var mainMenuClass = FindObjectOfType(typeof(Menu)) as Menu;
             mainMenuClass.UpdateGameResultScores();
 
             _gameResultMenu.SetActive(true);
