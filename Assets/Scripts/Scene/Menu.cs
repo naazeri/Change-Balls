@@ -11,8 +11,8 @@ namespace Scene
     public class Menu : MonoBehaviour
     {
         // main menu
-        [SerializeField] TextMeshProUGUI _gameVersionText;
-        [SerializeField] GameObject _updateGameButton;
+        // [SerializeField] TextMeshProUGUI _gameVersionText;
+        // [SerializeField] GameObject _updateGameButton;
 
         // speed
         [SerializeField] Slider _speedSlider;
@@ -37,37 +37,37 @@ namespace Scene
 
         private void Start()
         {
-            _gameVersionText.text = "Version: " + Application.version;
+            // _gameVersionText.text = "Version: " + Application.version;
 
             //if (Application.platform != RuntimePlatform.WebGLPlayer)
             //{
-            StartCoroutine(CheckLatestGameVersion());
+            //StartCoroutine(CheckLatestGameVersion());
             //}
         }
-        private IEnumerator CheckLatestGameVersion()
-        {
-            using (UnityWebRequest webRequest = UnityWebRequest.Get(Configs.ApiLatestGameVersionURL))
-            {
-                // Request and wait for the desired page.
-                yield return webRequest.SendWebRequest();
+        //private IEnumerator CheckLatestGameVersion()
+        //{
+        //    using (UnityWebRequest webRequest = UnityWebRequest.Get(Configs.ApiLatestGameVersionURL))
+        //    {
+        //        // Request and wait for the desired page.
+        //        yield return webRequest.SendWebRequest();
 
-                if (webRequest.isNetworkError || webRequest.isHttpError)
-                {
-                    Debug.Log("error on getting latest game version: " + webRequest.error);
-                    yield break;
-                }
+        //        if (webRequest.isNetworkError || webRequest.isHttpError)
+        //        {
+        //            Debug.Log("error on getting latest game version: " + webRequest.error);
+        //            yield break;
+        //        }
 
-                var json = JsonUtility.FromJson<VersionModel>(webRequest.downloadHandler.text);
-                var latestVersion = json.GetLatestVersion();
-                var currentVersion = Application.version;
+        //        var json = JsonUtility.FromJson<VersionModel>(webRequest.downloadHandler.text);
+        //        var latestVersion = json.GetLatestVersion();
+        //        var currentVersion = Application.version;
 
-                if (latestVersion != null && latestVersion.Length > 0 && !currentVersion.Equals(latestVersion))
-                {
-                    _gameVersionText.text += " - New Version Available: " + latestVersion;
-                    _updateGameButton.SetActive(true);
-                }
-            }
-        }
+        //        if (latestVersion != null && latestVersion.Length > 0 && !currentVersion.Equals(latestVersion))
+        //        {
+        //            _gameVersionText.text += " - New Version Available: " + latestVersion;
+        //            _updateGameButton.SetActive(true);
+        //        }
+        //    }
+        //}
 
         private void UpdateFrameRate(int fps)
         {
