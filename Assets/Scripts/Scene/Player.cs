@@ -126,7 +126,7 @@ namespace Scene
             SaveCurrentScore();
             ResetGame();
 
-            var mainMenuClass = FindObjectOfType(typeof(Menu)) as Menu;
+            var mainMenuClass = FindObjectOfType(typeof(GameManager)) as GameManager;
             mainMenuClass.UpdateGameResultScores();
 
             _gameResultMenu.SetActive(true);

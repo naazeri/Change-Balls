@@ -8,10 +8,10 @@ using Utils;
 
 namespace Scene
 {
-    public class Menu : MonoBehaviour
+    public class GameManager : MonoBehaviour
     {
         // main menu
-        // [SerializeField] TextMeshProUGUI _gameVersionText;
+        [SerializeField] TextMeshProUGUI _gameVersionText;
         // [SerializeField] GameObject _updateGameButton;
 
         // speed
@@ -37,7 +37,7 @@ namespace Scene
 
         private void Start()
         {
-            // _gameVersionText.text = "Version: " + Application.version;
+            _gameVersionText.text = "Version: " + Application.version;
 
             //if (Application.platform != RuntimePlatform.WebGLPlayer)
             //{
