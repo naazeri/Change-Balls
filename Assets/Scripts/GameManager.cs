@@ -32,7 +32,8 @@ namespace Scene
 
         private void Awake()
         {
-            UpdateFrameRate(DataManager.GetFrameRate());
+            //UpdateFrameRate(DataManager.GetFrameRate());
+            Debug.Log("game starrt");
         }
 
         private void Start()
