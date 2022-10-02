@@ -95,7 +95,7 @@ namespace Scene
 
         public void OnUpdateGameClicked()
         {
-            Application.OpenURL("https://naazeri.ir/my-account/downloads/");
+            Application.OpenURL("https://naazeri.com/my-account/downloads/");
         }
 
         /*** Speed Menu ***/
@@ -128,7 +128,7 @@ namespace Scene
         /*** About Menu ***/
         public void OpenSiteUrl()
         {
-            Application.OpenURL("https://naazeri.ir/");
+            Application.OpenURL("https://naazeri.com/");
         }
 
         /*** Statistics Menu ***/
