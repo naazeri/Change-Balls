@@ -27,10 +27,10 @@ namespace Scene
 
         private void OnEnable()
         {
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                EnableTouchSupport(); // uncomment for android touch
-            }
+            // if (Application.platform == RuntimePlatform.Android)
+            // {
+            EnableTouchSupport(); // uncomment for android touch
+            // }
 
             _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
             _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
