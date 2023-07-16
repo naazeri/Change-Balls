@@ -33,7 +33,7 @@ namespace Scene
         private void Awake()
         {
             //UpdateFrameRate(DataManager.GetFrameRate());
-            Debug.Log("game start");
+            Debug.Log("game starrt");
         }
 
         private void Start()
@@ -96,7 +96,7 @@ namespace Scene
 
         public void OnUpdateGameClicked()
         {
-            Application.OpenURL("https://naazeri.ir/my-account/downloads/");
+            Application.OpenURL("https://naazeri.ir");
         }
 
         /*** Speed Menu ***/
