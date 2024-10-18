@@ -24,6 +24,7 @@ namespace Scene
         private SpriteRenderer _spriteRenderer;
         private int _score;
         private const float ChangePlayerColorDelayTimeDelayTime = 0.05f;
+        private int _playerColorNotChangedCount = 0;
 
         private void OnEnable()
         {
@@ -111,10 +112,15 @@ namespace Scene
             _speed = -_speed; // reverse moving direction
 
             // Change Player Color
-            var random = GetRandomNumber();
-            if (random > 0)
+            var changePlayerColor = GetRandomBool();
+            if (changePlayerColor || _playerColorNotChangedCount >= 3)
             {
+                _playerColorNotChangedCount = 0;
                 StartCoroutine(ChangePlayerColor(ChangePlayerColorDelayTimeDelayTime));
+            }
+            else
+            {
+                _playerColorNotChangedCount++;
             }
 
             IncreaseAndUpdateCurrentScoreUI();
@@ -203,7 +209,12 @@ namespace Scene
 
         private static int GetRandomNumber()
         {
-            return UnityEngine.Random.Range(-5, 5);
+            return UnityEngine.Random.Range(-2, 3);
+        }
+
+        private static bool GetRandomBool()
+        {
+            return Random.value > 0.5f;
         }
     }
 }

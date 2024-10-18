@@ -39,7 +39,7 @@ namespace Scene
         private void Start()
         {
             _gameVersionText.text = "Version: " + Application.version;
-
+            OnSpeedSliderValueChange();
             //if (Application.platform != RuntimePlatform.WebGLPlayer)
             //{
             //StartCoroutine(CheckLatestGameVersion());
@@ -96,7 +96,7 @@ namespace Scene
 
         public void OnUpdateGameClicked()
         {
-            Application.OpenURL("https://naazeri.ir");
+            Application.OpenURL(Configs.SiteURL);
         }
 
         /*** Speed Menu ***/
@@ -129,7 +129,7 @@ namespace Scene
         /*** About Menu ***/
         public void OpenSiteUrl()
         {
-            Application.OpenURL("https://naazeri.ir/");
+            Application.OpenURL(Configs.SiteURL);
         }
 
         /*** Statistics Menu ***/
